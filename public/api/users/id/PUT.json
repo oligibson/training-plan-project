@@ -1,0 +1,30 @@
+{
+  "access": "All",
+  "token": "No",
+  "params": [
+    {
+      "name": "fname",
+      "type": "STRING",
+      "description": "The user's first name"
+    },
+    {
+      "name": "lname",
+      "type": "STRING",
+      "description": "The user's last name"
+    },
+    {
+      "name": "email",
+      "type": "STRING",
+      "description": "The user's email address"
+    },
+    {
+      "name": "isAdmin",
+      "type": "BOOLEAN",
+      "description": "To set the user as an admin set this to 'true'. To remove a user's admin rights, set this to 'false'."
+    }
+  ],
+  "description" : "Modify the specified user",
+  "response": {
+    "message": "User updated!"
+  }
+}

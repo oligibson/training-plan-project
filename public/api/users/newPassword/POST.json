@@ -1,0 +1,15 @@
+{
+  "access": "All",
+  "token": "No",
+  "params": [
+    {
+      "name": "email",
+      "type": "STRING",
+      "description": "The user's email address"
+    }
+  ],
+  "description" : "Emails the user with a newly genarated password",
+  "response": {
+    "result": "success"
+  }
+}

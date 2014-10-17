@@ -1,0 +1,9 @@
+{
+  "isMethod": true,
+  "access": "Admin",
+  "token": "Yes",
+  "description" : "Deletes the seat",
+  "response": {
+    "message": "Successfully deleted!"
+  }
+}

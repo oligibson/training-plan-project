@@ -1,0 +1,100 @@
+{
+  "access": "All",
+  "token": "No",
+  "description" : "Array of seat information related to the given booking",
+  "response": {
+
+    "user": "5405e74d7f208e620b6b60ec",
+
+    "seats": [
+
+        {
+
+            "__v": 0,
+
+            "_id": "53ff22280c6a49d9aa78f7e4",
+
+            "seatNo": 0,
+
+            "specs": {
+
+                "smartScreen": true,
+
+                "imac": true,
+
+                "display": false
+
+            },
+
+            "maxPeople": 1,
+
+            "type": "",
+                    
+            "bookingInterval": 86400000,    
+          
+            "maxBookingMultiple" : 28
+
+        },
+
+        {
+
+            "seatNo": 1,
+
+            "_id": "53ff222f0c6a49d9aa78f7e5",
+
+            "__v": 0,
+
+            "specs": {
+
+                "smartScreen": true,
+
+                "imac": true,
+
+                "display": false
+
+            },
+
+            "maxPeople": 1,
+
+            "type": "Desk",
+                    
+            "bookingInterval": 86400000,    
+          
+            "maxBookingMultiple" : 28
+
+
+        },
+
+        {
+
+            "_id": "53ff22b50c6a49d9aa78f7e6",
+
+            "seatNo": 2,
+
+            "__v": 0,
+
+            "specs": {
+
+                "smartScreen": true,
+
+                "imac": true,
+
+                "display": true
+
+            },
+
+            "maxPeople": 10,
+
+            "type": "Desk",
+                    
+            "bookingInterval": 86400000,    
+          
+            "maxBookingMultiple" : 28
+
+
+        }
+
+    ]
+
+  }
+}

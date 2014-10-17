@@ -1,0 +1,24 @@
+{
+  "access": "All",
+  "token": "No",
+  "description" : "Gets a list of all the sessions associated with the given user",
+  "response":[
+
+    {
+      "_id":"5436a1d58ef82f6980f26825",
+      "userId":"542fee894e51797a026a87ae",
+      "activity":"run",
+      "comments":"Felt Good",
+      "completed":true,
+      "exercises":[]
+    },
+    {
+      "_id":"5436a1e58ef82f6980f26826",
+      "userId":"542fee894e51797a026a87ae",
+      "activity":"bike",
+      "comments":"Terrible",
+      "completed":true,
+      "exercises":[]
+    }
+  ]
+}

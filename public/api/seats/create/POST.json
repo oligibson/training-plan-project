@@ -1,0 +1,64 @@
+{
+  "access": "Admin",
+  "token": "Yes",
+  "description" : "Creates a new seat.",
+  "params": [
+    {
+      "name": "seatNo",
+      "type": "INTEGER",
+      "description": "The seat number"
+    },
+    {
+      "name": "type",
+      "type": "STRING",
+      "description": "The seat type"
+    },
+    {
+      "name": "maxPeople",
+      "type": "INTEGER",
+      "description": "The maximum number of people"
+    },
+    {
+      "name": "specs",
+      "type": "JSON",
+      "description": "JSON object representing the specs of the seat e.g. {\"imac\": false, \"smartScreen\": true, \"display\": false}"
+    },
+    {
+      "name": "bookingInterval",
+      "type": "INTEGER",
+      "description": "The interval of which the time span of the booking must be a multiple of. E.g. booking must be an exact number of DAYS (86400000ms)"
+    },
+    {
+      "name": "maxBookingMultiple",
+      "type": "INTEGER",
+      "description": "The max number of booking intervals this booking can span (e.g. 28 DAYS)"
+    }
+  ],
+  "response": {
+
+    "__v": 0,
+
+    "seatNo": 10,
+
+    "_id": "5408390cbe4c32cb048a3ab2",
+
+    "specs": {
+
+        "smartScreen": true,
+
+        "imac": false,
+
+        "display": false
+
+    },
+
+    "maxPeople": 5,
+
+    "type": "Burger",
+    
+    "bookingInterval" : 86400000,
+    
+    "maxBookingMultiple": 28
+
+  }
+}

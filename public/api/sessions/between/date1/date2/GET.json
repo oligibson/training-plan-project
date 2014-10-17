@@ -1,0 +1,24 @@
+{
+  "access": "All",
+  "token": "No",
+  "description" : "Gets list of bookings which contain days between the given dates",
+  "response": [
+
+    {
+
+        "_id": "540728263dde3d0c0d8147fb",
+
+        "userId": "5405e74d7f208e620b6b60ec",
+
+        "projectName": "Microsite",
+
+        "projectType": "Labs",
+
+        "start": "2014-01-01T00:00:00.000Z",
+
+        "end": "2014-02-02T00:00:00.000Z"
+
+    }
+
+]
+}

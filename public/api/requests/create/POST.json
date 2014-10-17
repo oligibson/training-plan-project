@@ -1,0 +1,48 @@
+{
+  "access": "All",
+  "token": "Yes",
+  "description" : "Creates a new request and notifies the ilabs@uk.ibm.com email address.",
+  "params": [
+    {
+      "name": "start",
+      "type": "DATE (INTEGER)",
+      "description": "The time (in ms) of the start of the request"
+    },
+    {
+      "name": "end",
+      "type": "DATE (INTEGER)",
+      "description": "The time (in ms) of the end of the request"
+    },
+    {
+      "name": "description",
+      "type": "STRING",
+      "description": "A description of the nature of the request"
+    },
+    {
+      "name": "businessNeed",
+      "type": "STRING",
+      "description": "The justification for making the request from a business need perspective"
+    },
+    {
+      "name": "projectName",
+      "type": "STRING",
+      "description": "The name of the project"
+    },
+    {
+      "name": "projectType",
+      "type": "STRING",
+      "description": "The type of the project"
+    },
+    {
+      "name": "numberOfSeats",
+      "type": "INTEGER",
+      "description": "The number of seats required"
+    }
+  ],
+  "response": {
+
+    "message": "Request created!"
+
+  }
+
+}

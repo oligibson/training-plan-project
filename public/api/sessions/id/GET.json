@@ -1,0 +1,20 @@
+{
+  "isMethod": true,
+  "access": "All",
+  "token": "No",
+  "description" : "Returns the booking associated with the given ID",
+  "response": [
+
+    {
+
+      "_id":"5436a1d58ef82f6980f26825",
+      "userId":"542fee894e51797a026a87ae",
+      "activity":"run",
+      "comments":"Felt Good",
+      "completed":true,
+      "exercises":[]
+      
+    }
+
+  ]
+}

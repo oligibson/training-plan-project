@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Training Plan REST API Documentation</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    
+    <!-- Bootstrap-table -->
+    <link rel="stylesheet" href="css/bootstrap-table.min.css">
+    
+    <!-- Prismjs -->
+    <link rel="stylesheet" href="css/prism.css">
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+    
+    <!-- Code hacked together in an hour to display documentation because IBM Docs won't output the file properly -->
+    <!-- #whyBM #doesntWorkLight -->
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1>Training Plan REST API <small>Documentation</small></h1>
+      </div>
+      
+      <div class="col-xs-4" style="overflow: scroll; max-height: 650px;">
+        <ul class="nav nav-pills nav-stacked">
+          <li id="introButton" class="active"><a href="#">Introduction</a></li>
+          <li><a href="#">/api/users                                  </a></li>
+          <li><a href="#">/api/users/create                           </a></li>
+          <li><a href="#">/api/users/:id                              </a></li>
+          <li><a href="#">/api/users/:id/sessions                     </a></li>
+          <li><a href="#">/api/sessions/create                        </a></li>
+          <li><a href="#">/api/sessions/:id                           </a></li>
+          <!--
+          <li><a href="#">/api/login                                  </a></li>
+          <li><a href="#">/api/bookings                               </a></li>
+          <li><a href="#">/api/bookings/all                           </a></li>
+          <li><a href="#">/api/bookings/active                        </a></li>
+          <li><a href="#">/api/bookings/create                        </a></li>
+          <li><a href="#">/api/bookings/:id                           </a></li>
+          <li><a href="#">/api/bookings/:id/user                      </a></li>
+          <li><a href="#">/api/bookings/:id/seats                     </a></li>
+          <li><a href="#">/api/bookings/between/:date1/:date2         </a></li>
+          <li><a href="#">/api/bookings/between/:date1/:date2/users   </a></li>
+          <li><a href="#">/api/bookings/between/:date1/:date2/seats   </a></li>
+          <li><a href="#">/api/users                                  </a></li>
+          <li><a href="#">/api/users/create                           </a></li>
+          <li><a href="#">/api/users/:id                              </a></li>
+          <li><a href="#">/api/users/:id/bookings                     </a></li>
+          <li><a href="#">/api/users/:id/requests                     </a></li>
+          <li><a href="#">/api/users/newPassword                      </a></li>
+          <li><a href="#">/api/seats                                  </a></li>
+          <li><a href="#">/api/seats/create                           </a></li>
+          <li><a href="#">/api/seats/:id                              </a></li>
+          <li><a href="#">/api/requests                               </a></li>
+          <li><a href="#">/api/requests/all                           </a></li>
+          <li><a href="#">/api/requests/create                        </a></li>
+          <li><a href="#">/api/requests/:id                           </a></li>
+          <li><a href="#">/api/projects                               </a></li>
+          <li><a href="#">/api/projects/active                        </a></li>
+          -->
+        </ul>
+      </div>
+      <div class="col-xs-8">
+        <div id="introduction" class="panel panel-default panel-primary">
+          <div class="panel-heading">
+            <div class="panel-title">
+              Introduction
+            </div>
+          </div>
+          <div class="panel-body">
+            <h2>Overview</h2>
+            <p>
+              This document provides an explanation of how to use the Training Plan REST API.
+            </p>
+            <h2>Request Structure</h2>
+            <p>
+              The requests for this API must use x-www-form-urlencoded requests.
+            </p>
+            <h2>Routes</h2>
+            <p>
+              Use the navigation at the side of this page to view information about the routes exposed by this API.
+            </p>
+            <h2>Date format</h2>
+            All times in this database are measured from 01 Jan 1970 00:00:00 UTC.
+            <h2>Editing this document</h2>
+            This document contains a directory called "/api". Contained within this is a directory structure which mirrors the routes of this API. In each API route's directory there is an info.json file containing the set of methods that the route accepts, as well as individual GET.json, PUT.json etc. files which specify information about the respective methods.
+          </div>
+        </div>
+        <div id="info" class="panel panel-default panel-primary" style="display: none;">
+          <div class="panel-heading">
+            <div class="panel-title">
+              {{ROUTE}}
+            </div>
+          </div>
+          <div class="panel-body">
+            <table class="table">
+               <thead>
+                  <tr>
+                     <th>Method</th>
+                     <th>Information</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr class="GET">
+                    <td><span class="label label-default label-success">GET</span></td>
+                    <td>
+                      <p>
+                        <span class="glyphicon glyphicon-user">  </span> <strong>Access: </strong> 
+                        <span class="access label label-default label-primary">{{access}}</span>
+                      </p>
+                      <p>
+                        <span class="glyphicon glyphicon-qrcode"></span> <strong>Token Required: </strong>
+                        <span class="token label label-default label-default">{{token}}</span>
+                      </p>
+                      <blockquote><p class="description">{{Description}}</p></blockquote>
+                      
+                      <h4>Example Response</h4>
+                      <pre><code class="response">{{code}}</code></pre>
+                    </td>
+                  </tr>
+                  <tr class="POST">
+                    <td><span class="label label-default label-info">POST</span></td>
+                    <td>
+                      <p><span class="glyphicon glyphicon-user">  </span> <strong>Access:         </strong> 
+                        <span class="access label label-default label-primary">{{access}}</span>
+                      </p>
+                      <p>
+                        <span class="glyphicon glyphicon-qrcode"></span> <strong>Token Required: </strong> 
+                        <span class="token label label-default label-default">{{token}}</span>
+                      </p>
+                      <blockquote><p class="description">{{Description}}</p></blockquote>
+                      <h4>Request Parameters</h4>
+                      <table data-toggle="table">
+                        <thead>
+                            <tr>
+                                <th data-field="name">Name</th>
+                                <th data-field="type">Type</th>
+                                <th data-field="description">Description</th>
+                            </tr>
+                        </thead>
+                      </table>
+                      
+                      <h4>Example Response</h4>
+                      <pre><code class="response">{{code}}</code></pre>
+                    </td>
+                  </tr>
+                  <tr class="PUT">
+                    <td><span class="label label-default label-warning">PUT</span></td>
+                    <td>
+                      <p><span class="glyphicon glyphicon-user">  </span> <strong>Access:         </strong> 
+                        <span class="access label label-default label-primary">{{access}}</span>
+                      </p>
+                      <p>
+                        <span class="glyphicon glyphicon-qrcode"></span> <strong>Token Required: </strong> 
+                        <span class="token label label-default label-default">{{token}}</span>
+                      </p>
+                      <blockquote><p class="description">{{Description}}</p></blockquote>
+                      <h4>Request Parameters</h4>
+                      <table data-toggle="table">
+                        <thead>
+                            <tr>
+                                <th data-field="name">Name</th>
+                                <th data-field="type">Type</th>
+                                <th data-field="description">Description</th>
+                            </tr>
+                        </thead>
+                      </table>
+                      
+                      <h4>Example Response</h4>
+                      <pre><code class="response">{{code}}</code></pre>
+                    </td>
+                  </tr>
+                  <tr class="DELETE">
+                    <td><span class="label label-default label-danger">DELETE</span></td>
+                    <td>
+                      <p>
+                        <span class="glyphicon glyphicon-user">  </span> <strong>Access: </strong> 
+                        <span class="access label label-default label-primary">{{access}}</span>
+                      </p>
+                      <p>
+                        <span class="glyphicon glyphicon-qrcode"></span> <strong>Token Required: </strong>
+                        <span class="token label label-default label-default">{{token}}</span>
+                      </p>
+                      <blockquote><p class="description">{{Description}}</p></blockquote>
+                      
+                      <h4>Example Response</h4>
+                      <pre><code class="response">{{code}}</code></pre>
+                    </td>
+                  </tr>
+               </tbody>
+            </table>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    
+    <script src="js/prism.js"></script>
+    <script src="js/bootstrap-table.min.js"></script>
+    
+    <script src="js/script.js"></script>
+  </body>
+</html>

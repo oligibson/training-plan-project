@@ -1,0 +1,11 @@
+{
+  "isMethod": true,
+  "access": "All",
+  "token": "No",
+  "description" : "Deletes the booking",
+  "response": {
+
+    "message": "Booking deleted!"
+
+  }
+}

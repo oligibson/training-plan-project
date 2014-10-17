@@ -1,0 +1,19 @@
+{
+    "name": "training-plan",
+    "version": "0.0.1",
+    "description": "A simple API for recording training sessions",
+    "main": "app.js",
+    "dependencies" : {
+      "express"              : "~4.6.1",
+      "mongoose"             : "~3.8.13",
+      "morgan"               : "~1.1.1",
+      "body-parser"          : "~1.4.3",
+      "sendmail"             : "~0.2.1",
+      "authenticate"         : "*",
+      "crypto"               : "*"
+    },
+    "engines": {
+        "node": "0.10.26"
+    },
+    "repository": {}
+}

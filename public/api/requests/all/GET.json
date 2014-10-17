@@ -1,0 +1,21 @@
+{
+  "isMethod": true,
+  "access": "Admin",
+  "token": "Yes",
+  "description" : "Gets a list of all special requests (regardless of completed status)",
+  "response":[
+    {
+        "_id": "5408345e9d72877503f293c7",
+        "userId": "5405e74d7f208e620b6b60ec",
+        "businessNeed": "Supporting a bid",
+        "projectName": "Microsite",
+        "projectType": "Torture",
+        "description": "Post Office Microsite doesn't work in IE - need urgent space for a team of 50 developers to get it working",
+        "start": "2014-09-04T09:42:12.982Z",
+        "end": "2014-09-08T23:00:00.000Z",
+        "created": "2014-09-04T09:43:58.505Z",
+        "completed": false,
+        "accepted": false
+    }
+  ]
+}
