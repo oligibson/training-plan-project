@@ -29,6 +29,9 @@ module.exports = function (app, permissions) {
 
   app.get('/api/sessions/:id',                                             Sessions.getSession);
 
+  app.get('/api/exercises',                                                Exercises.getExercisesAll);
+  app.get('/api/exercises/:id',                                            Exercises.getExercise);
+
 // POST =======================================================================
   app.post('/api/users/create',                                            Users.createUser);
   app.post('/api/sessions/create',                                         Sessions.createSession);

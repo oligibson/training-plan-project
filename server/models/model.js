@@ -48,6 +48,14 @@ exports.Session.projection = {
   exercises:   '$sessions.exercises',  
 };
 
+exports.Exercise.projection = {
+  _id:         '$sessions.exercises._id',
+  userId:      '$_id',
+  name:        '$sessions.exercises.name',
+  completed:   '$sessions.exercises.completed',
+  sets:        '$sessions.exercises.sets',  
+};
+
 exports.getId = function (id) {
   "use strict";
   try {
