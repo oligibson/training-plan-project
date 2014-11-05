@@ -25,7 +25,7 @@ module.exports = function (app, permissions) {
 // GET  =======================================================================
   app.get('/api/users',                                                    Users.getUsers);
   app.get('/api/users/:id',                                                Users.getUser);
-  app.get('/api/users/:id/sessions',                                       Users.getUserSessions);
+  app.get('/api/users/:id/sessions',                                       Sessions.getUserSessions);
 
   app.get('/api/sessions/:id',                                             Sessions.getSession);
 

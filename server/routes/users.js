@@ -39,22 +39,6 @@
     });
   };
   
-  exports.getUserSessions = function (req, res) {
-    model.User.aggregate([
-      { $match: {'_id' : model.getId(req.params.id)}},
-      { $unwind: '$sessions' },
-      {
-        $project: model.Session.projection
-      }
-    ], function (err, sessions) {
-      if (err) {
-        res.json({error: err});
-        return;
-      }
-      res.json(sessions);
-    });
-  };
-  
   function sendPassword(email, password, message) {
     if (message === undefined) {
       message = 'Desk Booking Access Code';
@@ -99,7 +83,6 @@
             email           : req.body.email.toLowerCase(),
             sessionsTotal   : 0,
             isAdmin         : 0,
-            sessions        : [],
             password        : password
           }, function (err, user) {
             if (err) {

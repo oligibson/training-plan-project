@@ -3,6 +3,7 @@
 var mongoose = exports.mongoose = require('mongoose');
 
 var session = new mongoose.Schema({
+  userId      : {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   date        : {type : Date},
   activity    : {type : String, default: ''},
   type        : {type : String, default: ''},
@@ -30,8 +31,8 @@ var user = new mongoose.Schema({
   email           : {type : String, default: ''},
   sessionsTotal   : {type : Number},
   isAdmin         : {type : Boolean, default: false},
-  sessions        : [session],
-  password        : {type : String}
+  password        : {type : String},
+  sessions        : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Session' }]
 });
 
 exports.Session   = mongoose.model('Session',  session);
@@ -39,21 +40,12 @@ exports.Exercise  = mongoose.model('Exercise', exercise);
 exports.Set       = mongoose.model('Set',      set);
 exports.User      = mongoose.model('User',     user);
 
-exports.Session.projection = {
-  _id:         '$sessions._id',
-  userId:      '$_id',
-  activity:    '$sessions.activity',
-  comments:    '$sessions.comments',
-  completed:   '$sessions.completed',
-  exercises:   '$sessions.exercises',  
-};
-
 exports.Exercise.projection = {
-  _id:         '$sessions.exercises._id',
-  userId:      '$_id',
-  name:        '$sessions.exercises.name',
-  completed:   '$sessions.exercises.completed',
-  sets:        '$sessions.exercises.sets',  
+  _id:         '$exercises._id',
+  sessionId:   '$_id',
+  name:        '$exercises.name',
+  completed:   '$exercises.completed',
+  sets:        '$exercises.sets',  
 };
 
 exports.getId = function (id) {

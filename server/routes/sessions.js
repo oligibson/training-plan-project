@@ -14,36 +14,6 @@
       warn: console.warn,
       error: console.error
     }});
-
-  function sendErrorFn(res) {
-    return function (err) {
-      res.json({error: err});
-    };
-  }
-  function sendResultFn(res) {
-    return function (result) {
-      res.json(result);
-    };
-  }
-
-  function findSessions(match, project, errorCallback, doneCallback) {
-    var aggregation = [
-      { $unwind: '$sessions' },
-      { $match: match }
-    ];
-    
-    if (project !== null) {
-      aggregation.push({ $project: project });
-    }
-    
-    model.User.aggregate(aggregation, function (err, result) {
-      if (err) {
-        errorCallback(err);
-        return;
-      }
-      doneCallback(result);
-    });
-  }
   
   exports.createSession = function (req, res) {
     
@@ -58,7 +28,7 @@
     }
     
     model.User.findById(req.body.id, function (err, user) {
-        if (user === null) {
+        if (user == null) {
           res.json({ message: 'User not found' });
           return;
         }
@@ -68,61 +38,80 @@
           return;
         }
 
-        user.sessions.push(new model.Session(
-          {
-            date        : req.body.date,
-            activity    : req.body.activity,
-            type        : req.body.type,
-            completed   : false
-          }
-        ));
-
-        user.sessionsTotal += 1;
-
-        user.save(function (err) {
+        model.Session.create({
+          userId      : model.getId(req.body.id),
+          date        : req.body.date,
+          activity    : req.body.activity,
+          type        : req.body.type,
+          completed   : false
+        }, function (err, session) {
           if (err) {
             res.json({error: err});
           }
-  
-          res.json({ message: 'Session created!' });
+
+          user.sessionsTotal += 1;
+
+          user.save(function (err) {
+            if (err) {
+              res.json({error: err});
+            }
+          });
+
+          res.json(session);
         });
       });
   };
 
   exports.getSession = function (req, res) {
-    findSessions({
-      'sessions._id' : model.getId(req.params.id)
-    }, sessionProjection, sendErrorFn(res), sendResultFn(res));
+    model.Session.findById(req.params.id, function (err, session){
+      if(err){
+        res.json({error: err});
+        return;
+      }
+      res.json(session);
+    });
+  };
+
+  exports.getUserSessions = function (req, res) {
+    model.Session.find({'userId' : model.getId(req.params.id)}, function (err, sessions){
+      if (err) {
+        res.json({error: err});
+        return;
+      }
+      if (sessions.length < 1){
+        res.json({ message: 'No Sessions Found'});
+        return;
+      }
+      res.json(sessions);
+    });
   };
 
   exports.modifySession = function (req, res) {
 
-    model.User.findOne({'sessions._id' : model.getId(req.params.id)}, function (err, user) {
+    model.Session.findById(model.getId(req.params.id), function (err, session) {
       var
         fields = [
           'comments',
           'completed'
         ],
-        i, session;
+        i
       
       if (err) {
         res.json({error: err});
         return;
       }
       
-      if (user === undefined) {
+      if (session == undefined) {
         res.json({ message: 'Session not found' });
         return;
       }
-
-      session = user.sessions.id(req.params.id);
       
       for (i = 0; i < fields.length; ++i) {
         if (req.body[fields[i]] !== undefined) {
           session[fields[i]] = req.body[fields[i]];
         }
       }
-      user.save(function (err) {
+      session.save(function (err) {
         if (err) {
           res.json({error: err});
           return;
@@ -135,30 +124,25 @@
 
 
   exports.deleteSession = function (req, res) {
-    model.User.find({'sessions._id' : model.getId(req.params.id)}, function (err, users) {
-      var
-        user = users[0];
-      if (user === undefined) {
+    model.Session.findById(model.getId(req.params.id), function (err, session){
+      if(session == undefined){
         res.json({ message: 'Session not found' });
         return;
       }
-      
+
       if (err) {
         res.json({error: err});
         return;
       }
-      
-      user.sessions.pull({'_id': model.getId(req.params.id)});
 
-      user.sessionsTotal -= 1;
-      
-      user.save(function (err) {
+      session.remove(function (err, result) {
         if (err) {
           res.json({error: err});
+          return;
         }
-
         res.json({ message: 'Session deleted!' });
       });
+
     });
   };
 
