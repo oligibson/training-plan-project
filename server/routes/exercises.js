@@ -44,65 +44,13 @@
       'exercises._id' : model.getId(req.params.id)
     }, exerciseProjection, sendErrorFn(res), sendResultFn(res));
   };
+
+  exports.modifyExercise = function (res, req) {
+
+    
+  };
   
   //Rewrite this function to be more efficient! use model.update
-  /*
-  exports.createExercise = function (req, res) {
-    
-    if (req.body.userId      === undefined ||
-        req.body.sessionId   === undefined ||
-        req.body.name        === undefined ||
-        req.body.setNo       === undefined
-        ){
-      res.status(400).json({
-        error: 'Some required parameters were not found. See documentation.'
-      });
-      return;
-    }
-    
-    model.User.findById(req.params.userId, function (err, user) {
-
-        if (user === null) {
-          res.json({ message: 'User not found' });
-          return;
-        }
-  
-        if (err) {
-          res.json({error: err});
-          return;
-        }
-
-        var sets = [];
-
-        if(req.body.reps != undefined){
-
-          for (var i = 0; i < req.body.setNo; ++i) {
-            sets.push(new model.Set({
-                reps        : req.body.reps
-            }));
-          }
-        }
-
-        var session = user.sessions.id(req.body.sessionId);
-        
-        session.exercises.push(new model.Exercise(
-            {
-              name        : req.body.name,
-              setNo       : req.body.setNo,
-              sets        : sets
-            }
-          ));
-
-        user.save(function (err) {
-          if (err) {
-            res.json({error: err});
-          }
-
-          res.json({ message: 'Exercise created!' });
-        });
-    });
-  }
-  */
   exports.createExercise = function (req, res) {
     
     if (req.body.sessionId   === undefined ||
