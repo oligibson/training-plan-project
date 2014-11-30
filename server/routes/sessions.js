@@ -112,15 +112,15 @@
         }
       }
 
-      session.exercises = req.body.exercises;
-
-      /*
-
-      for(var j 0; j < req.body.exercises; j++){
-
+      for(var j = 0; j < req.body.exercises; j++){
+        session.exercises.push(new model.Exercise(
+          {
+            name        : req.body.exercises[j].name,
+            setNo       : req.body.exercises[j].setNo
+          }
+        ));
       }
 
-      */
       session.save(function (err) {
         if (err) {
           res.json({error: err});
