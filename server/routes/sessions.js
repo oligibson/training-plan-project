@@ -111,6 +111,16 @@
           session[fields[i]] = req.body[fields[i]];
         }
       }
+
+      session.exercises = req.body.exercises;
+
+      /*
+
+      for(var j 0; j < req.body.exercises; j++){
+
+      }
+
+      */
       session.save(function (err) {
         if (err) {
           res.json({error: err});
