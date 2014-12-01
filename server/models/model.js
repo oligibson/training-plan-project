@@ -15,14 +15,12 @@ var session = new mongoose.Schema({
 var exercise = new mongoose.Schema({
   name        : {type : String, default: ''},
   setNo       : {type : Number}, 
-  sets        : [set],
-  completed   : {type : Boolean, default: false}
+  sets        : [set]
 });
 
 var set = new mongoose.Schema({
-  reps        : {type : String, default: ''},
-  weight      : {type : Number, default: 0},
-  completed   : {type : Boolean, default: false}
+  reps        : {type : Number},
+  weight      : {type : Number, default: 0}
 });
 
 var user = new mongoose.Schema({

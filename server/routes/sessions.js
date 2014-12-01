@@ -89,13 +89,7 @@
   exports.modifySession = function (req, res) {
 
     model.Session.findById(model.getId(req.params.id), function (err, session) {
-      var
-        fields = [
-          'comments',
-          'completed'
-        ],
-        i
-      
+
       if (err) {
         res.json({error: err});
         return;
@@ -105,18 +99,31 @@
         res.json({ message: 'Session not found' });
         return;
       }
-      
-      for (i = 0; i < fields.length; ++i) {
-        if (req.body[fields[i]] !== undefined) {
-          session[fields[i]] = req.body[fields[i]];
-        }
+
+      if(req.body.comments != undefined){
+        session.comments = req.body.comments;
       }
 
-      for(var j = 0; j < req.body.exercises; j++){
+      if(req.body.completed != undefined){
+        session.completed = req.body.completed;
+      }
+
+      var sets = [];
+
+      for(var j = 0; j < req.body.exercises.length; j++){
+
+        for (var k = 0; k < req.body.exercises[j].sets.length; k++) {
+          sets.push(new model.Set({
+              reps        : req.body.exercises[j].sets[k].reps,
+              weight      : req.body.exercises[j].sets[k].weight
+          }));
+        }
+
         session.exercises.push(new model.Exercise(
           {
             name        : req.body.exercises[j].name,
-            setNo       : req.body.exercises[j].setNo
+            setNo       : req.body.exercises[j].setNo,
+            sets        : sets
           }
         ));
       }
