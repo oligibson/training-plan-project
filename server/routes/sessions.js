@@ -108,9 +108,9 @@
         session.completed = req.body.completed;
       }
 
-      var sets = [];
-
       for(var j = 0; j < req.body.exercises.length; j++){
+
+        var sets = [];
 
         for (var k = 0; k < req.body.exercises[j].sets.length; k++) {
           sets.push(new model.Set({
