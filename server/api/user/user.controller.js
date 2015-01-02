@@ -12,7 +12,7 @@ exports.index = function(req, res) {
 };
 
 // Get a single user
-exports.show = function(req, res) {
+exports.getUser = function(req, res) {
   User.findById(req.params.id, function (err, user) {
     if(err) { return handleError(res, err); }
     if(!user) { return res.send(404); }
@@ -20,22 +20,28 @@ exports.show = function(req, res) {
   });
 };
 
-// Creates a new user in the DB.
-exports.create = function(req, res) {
-  User.create(req.body, function(err, user) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, user);
-  });
-};
-
 // Updates an existing user in the DB.
 exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
-  User.findById(req.params.id, function (err, user) {
+  User.findById(model.getId(req.params.id), function (err, user) {
     if (err) { return handleError(res, err); }
     if(!user) { return res.send(404); }
-    var updated = _.merge(user, req.body);
-    updated.save(function (err) {
+
+    var
+      fields = [
+        'fname',
+        'lname',
+        'email',
+        'isAdmin'
+      ],
+      i;
+    
+    for (i = 0; i < fields.length; ++i) {
+      if (req.body[fields[i]] !== undefined) {
+        user[fields[i]] = req.body[fields[i]];
+      }
+    }
+    
+    user.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, user);
     });
