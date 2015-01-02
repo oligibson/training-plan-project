@@ -5,6 +5,6 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/trainingserver-test'
+    uri: 'mongodb://oligibson:westholi1602@ds043170.mongolab.com:43170/training'
   }
 };
