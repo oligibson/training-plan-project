@@ -28,6 +28,7 @@ var user = new mongoose.Schema({
   lname           : {type : String, default: ''},
   email           : {type : String, default: ''},
   sessionsTotal   : {type : Number},
+  lastSession     : {type : Date},
   isAdmin         : {type : Boolean, default: false},
   password        : {type : String},
   sessions        : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Session' }]

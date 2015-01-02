@@ -157,6 +157,9 @@
           res.json({error: err});
           return;
         }
+
+        // Decrement User total sessions
+
         res.json({ message: 'Session deleted!' });
       });
 

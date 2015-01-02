@@ -45,11 +45,6 @@
     }, exerciseProjection, sendErrorFn(res), sendResultFn(res));
   };
 
-  exports.modifyExercise = function (res, req) {
-
-    
-  };
-  
   //Rewrite this function to be more efficient! use model.update
   exports.createExercise = function (req, res) {
     
