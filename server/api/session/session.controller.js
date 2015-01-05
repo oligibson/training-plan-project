@@ -43,7 +43,8 @@ exports.getUserSessions = function (req, res) {
 exports.create = function(req, res) {
   if (req.body.id          === undefined ||
       req.body.date        === undefined ||
-      req.body.activity    === undefined
+      req.body.activity    === undefined ||
+      req.body.name        === undefined
       ){
     res.status(400).json({
       error: 'Some required parameters were not found. See documentation.'
@@ -64,6 +65,7 @@ exports.create = function(req, res) {
 
       Session.create({
         userId      : req.body.id,
+        name        : req.body.name
         date        : req.body.date,
         activity    : req.body.activity,
         type        : req.body.type,

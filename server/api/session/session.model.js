@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
 
 var SessionSchema = new Schema({
   userId      : {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+  name        : {type : String, default: ''},
   date        : {type : Date},
   activity    : {type : String, default: ''},
   type        : {type : String, default: ''},

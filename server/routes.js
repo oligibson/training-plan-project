@@ -8,6 +8,20 @@ var errors = require('./components/errors');
 
 module.exports = function(app) {
 
+  // ALLOW CORS 
+  app.all('*', function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, Accept, Origin, Referer, User-Agent, Content-Type, Authorization, x-access-token');
+
+    // intercept OPTIONS method
+    if (req.method === 'OPTIONS') {
+      res.send(200);
+    } else {
+      next();
+    }
+  });
+
   // Insert routes below
   app.use('/api/users', require('./api/user'));
   app.use('/api/sessions', require('./api/session'));
