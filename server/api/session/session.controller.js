@@ -65,7 +65,7 @@ exports.create = function(req, res) {
 
       Session.create({
         userId      : req.body.id,
-        name        : req.body.name
+        name        : req.body.name,
         date        : req.body.date,
         activity    : req.body.activity,
         type        : req.body.type,
