@@ -7,6 +7,22 @@ var Exercise = Model.Exercise;
 var Set = Model.Set;
 var User = require('../user/user.model');
 
+function getSessionNumber(userId, callback){
+  // Count the number of sessions a user has
+  Session.find({'userId' : userId}).count(function(err, count){
+    if (err) { return handleError(res, err); }
+    User.findById(userId, function (err, user) {
+      if (err) { return handleError(res, err); }
+      if(!user) { return res.send(404); }
+      user.sessionsTotal = count;
+      user.save(function (err) {
+        if (err) { return handleError(res, err); }
+        callback(user);
+      });
+    });
+  });
+}
+
 // Get list of sessions
 exports.index = function(req, res) {
   Session.find(function (err, sessions) {
@@ -129,7 +145,9 @@ exports.destroy = function(req, res) {
     if(!session) { return res.send(404); }
     session.remove(function(err) {
       if(err) { return handleError(res, err); }
-      return res.send(204);
+      getSessionNumber(session.userId, function(user){
+        return res.send(204);
+      });
     });
   });
 };
