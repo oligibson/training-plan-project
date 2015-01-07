@@ -7,6 +7,13 @@ var Exercise = Model.Exercise;
 var Set = Model.Set;
 var User = require('../user/user.model');
 
+function getMonday(d) {
+  d = new Date(d);
+  var day = d.getDay(),
+      diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
+  return new Date(d.setDate(diff));
+}
+
 function getSessionNumber(userId, callback){
   // Count the number of sessions a user has
   Session.find({'userId' : userId}).count(function(err, count){
@@ -16,6 +23,36 @@ function getSessionNumber(userId, callback){
       if(!user) { return res.send(404); }
       user.sessionsTotal = count;
       user.save(function (err) {
+        if (err) { return handleError(res, err); }
+        callback(user);
+      });
+    });
+  });
+}
+
+function getLatestSession(userId, callback){
+  Session.find({'userId' : userId}).sort({date: -1}).limit(1).exec(function (err, session){
+    if (err) { return handleError(res, err); }
+    User.findById(userId, function (err, user) {
+      if (err) { return handleError(res, err); }
+      if(!user) { return res.send(404); }
+      user.lastSession = session[0].date;
+      user.save(function (err, user) {
+        if (err) { return handleError(res, err); }
+        callback(user);
+      });
+    });
+  });
+};
+
+function getTotalSessionsThisWeek(userId, callback){
+  Session.find({'userId' : userId}).where('date').gt(getMonday(new Date())).count(function (err, count){
+    if (err) { return handleError(res, err); }
+    User.findById(userId, function (err, user) {
+      if (err) { return handleError(res, err); }
+      if(!user) { return res.send(404); }
+      user.sessionsThisWeek = count;
+      user.save(function (err, user) {
         if (err) { return handleError(res, err); }
         callback(user);
       });
@@ -36,6 +73,7 @@ exports.getSession = function(req, res) {
   Session.findById(req.params.id, function (err, session) {
     if(err) { return handleError(res, err); }
     if(!session) { return res.send(404); }
+    getTotalSessionsThisWeek('542fee894e51797a026a87ae');
     return res.json(session);
   });
 };
@@ -87,19 +125,18 @@ exports.create = function(req, res) {
         type        : req.body.type,
         completed   : false
       }, function (err, session) {
-        if (err) {
-          res.json({error: err});
-        }
+        if (err) { return handleError(res, err); }
 
-        user.sessionsTotal += 1;
-
-        user.save(function (err) {
-          if (err) {
-            res.json({error: err});
-          }
+        user.save(function (err, user) {
+          if (err) { return handleError(res, err); }
+          getSessionNumber(session.userId, function(){
+            getLatestSession(session.userId, function(){
+              getTotalSessionsThisWeek(session.userId, function(){
+                return res.json(200, session);
+              });
+            });
+          });
         });
-
-        res.json(200, session);
       });
     });
 };
@@ -145,8 +182,12 @@ exports.destroy = function(req, res) {
     if(!session) { return res.send(404); }
     session.remove(function(err) {
       if(err) { return handleError(res, err); }
-      getSessionNumber(session.userId, function(user){
-        return res.send(204);
+      getSessionNumber(session.userId, function(){
+        getLatestSession(session.userId, function(){
+          getTotalSessionsThisWeek(session.userId, function(){
+            return res.send(204);
+          });
+        });
       });
     });
   });

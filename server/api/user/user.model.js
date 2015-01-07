@@ -9,6 +9,7 @@ var UserSchema = new Schema({
   email           : {type : String, default: ''},
   sessionsTotal   : {type : Number},
   lastSession     : {type : Date},
+  sessionsThisWeek: {type : Number},
   isAdmin         : {type : Boolean, default: false}
 });
 
