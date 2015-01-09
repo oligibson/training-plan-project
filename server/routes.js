@@ -5,6 +5,7 @@
 'use strict';
 
 var errors = require('./components/errors');
+var multer = require('multer');
 
 module.exports = function(app) {
 
@@ -22,7 +23,10 @@ module.exports = function(app) {
     }
   });
 
+  app.use(multer({dest:'../../files/'}));
+
   // Insert routes below
+  app.use('/api/uploads', require('./api/upload'));
   app.use('/api/users', require('./api/user'));
   app.use('/api/sessions', require('./api/session'));
 
