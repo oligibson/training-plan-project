@@ -34,6 +34,7 @@ exports.profileUpload = function(req, res) {
       width: 1000, 
       height: 1000,
       crop: "limit",
+      tags: [ 'profile', user._id ],
       eager: {
         width: 140, 
         height: 140, 
