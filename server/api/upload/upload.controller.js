@@ -18,9 +18,7 @@ exports.profileUpload = function(req, res) {
     if(!user) { return res.send(404); }
     cloudinary.uploader.upload(req.files.photo.path, function(result) {
         if(user.profileImageId){
-          cloudinary.uploader.destroy(user.profileImageId, function(result) { 
-            console.log(result) 
-          });
+          cloudinary.uploader.destroy(user.profileImageId);
         }
         user.profileImage = result.url;
         user.mobileProfileImage = result.eager[0].url;
