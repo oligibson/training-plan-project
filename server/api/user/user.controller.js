@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var User = require('./user.model');
+var Session = require('../session/session.controller');
 
 // Get list of users
 exports.index = function(req, res) {
@@ -31,6 +32,11 @@ exports.update = function(req, res) {
         'fname',
         'lname',
         'email',
+        'city',
+        'gender',
+        'dob',
+        'weight',
+        'weightUnit',
         'isAdmin'
       ],
       i;
@@ -55,7 +61,9 @@ exports.destroy = function(req, res) {
     if(!user) { return res.send(404); }
     user.remove(function(err) {
       if(err) { return handleError(res, err); }
-      return res.send(204);
+      Session.removeUserSessions(req.params.id, function(){
+        return res.send(204);
+      });
     });
   });
 };

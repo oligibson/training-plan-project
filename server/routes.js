@@ -23,7 +23,7 @@ module.exports = function(app) {
     }
   });
 
-  app.use(multer({dest:'../../files/'}));
+  app.use(multer({dest:'./tmp'}));
 
   // Insert routes below
   app.use('/api/uploads', require('./api/upload'));

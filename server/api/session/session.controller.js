@@ -196,3 +196,11 @@ exports.destroy = function(req, res) {
 function handleError(res, err) {
   return res.send(500, err);
 }
+
+// Deletes all sessions associated to a user
+exports.removeUserSessions = function (userId, callback) {
+  Session.find({'userId' : userId}).remove(function (err, sessions){
+    if(err) { return handleError(res, err); }
+    callback();
+  });
+};
