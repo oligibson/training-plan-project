@@ -23,7 +23,7 @@ exports.getUser = function(req, res) {
 
 // Updates an existing user in the DB.
 exports.update = function(req, res) {
-  User.findById(model.getId(req.params.id), function (err, user) {
+  User.findById(req.params.id, function (err, user) {
     if (err) { return handleError(res, err); }
     if(!user) { return res.send(404); }
 
