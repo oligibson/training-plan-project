@@ -20,18 +20,32 @@ exports.index = function(req, res) {
 };
 
 exports.create = function (req, res, next) {
+  if (req.body.email       === undefined ||
+      req.body.password    === undefined ||
+      req.body.fname       === undefined ||
+      req.body.lname       === undefined
+      ){
+    res.status(400).json({
+      error: 'Some required parameters were not found. See documentation.'
+    });
+    return;
+  }
   var newUser = new User(req.body);
-  console.log(newUser);
   newUser.role = 'user';
   newUser.sessionsThisWeek = 0;
   newUser.sessionsTotal = 0;
-  console.log(newUser);
   newUser.save(function(err, user) {
-    console.log(err);
     if (err) return validationError(res, err);
     var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
     res.json({ token: token });
   });
+};
+
+// Refreshes User Auth Token
+exports.refresh = function(req, res, next) {
+  var userId = req.user._id;
+  var token = jwt.sign({_id: userId }, config.secrets.session, { expiresInMinutes: 60*5 });
+  res.json({ token: token });
 };
 
 // Get a single user
