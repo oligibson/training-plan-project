@@ -1,0 +1,8 @@
+{"v":0,"level":30,"name":"newrelic","hostname":"olis-mbp.home","pid":39495,"time":"2015-01-29T19:57:13.938Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":40,"name":"newrelic","hostname":"olis-mbp.home","pid":39495,"time":"2015-01-29T19:57:14.322Z","msg":"Unrecognized version NaN of Express detected; not instrumenting","component":"express"}
+{"v":0,"level":30,"name":"newrelic","hostname":"olis-mbp.home","pid":39495,"time":"2015-01-29T19:57:20.214Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/884102/applications/4930633","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"olis-mbp.home","pid":39495,"time":"2015-01-29T19:57:20.215Z","msg":"Connected to collector-131.newrelic.com:443 with agent run ID 21188913755367791.","component":"collector_api"}
+{"v":0,"level":30,"name":"newrelic","hostname":"olis-mbp.home","pid":39502,"time":"2015-01-29T19:59:34.796Z","msg":"Starting New Relic for Node.js connection process."}
+{"v":0,"level":40,"name":"newrelic","hostname":"olis-mbp.home","pid":39502,"time":"2015-01-29T19:59:35.034Z","msg":"Unrecognized version NaN of Express detected; not instrumenting","component":"express"}
+{"v":0,"level":30,"name":"newrelic","hostname":"olis-mbp.home","pid":39502,"time":"2015-01-29T19:59:44.313Z","msg":"Reporting to: https://rpm.newrelic.com/accounts/884102/applications/4930633","component":"new_relic_response"}
+{"v":0,"level":30,"name":"newrelic","hostname":"olis-mbp.home","pid":39502,"time":"2015-01-29T19:59:44.314Z","msg":"Connected to collector-131.newrelic.com:443 with agent run ID 21188913755374591.","component":"collector_api"}

@@ -1,5 +1,9 @@
 'use strict';
 
+// Your accountSid and authToken from twilio.com/user/account
+var accountSid = 'AC679c38dc16d782faa231afb369f39a15';
+var authToken = '3b0a89bb84341e73f64798d11a900abb';
+var twilio = require('twilio')(accountSid, authToken);
 var _ = require('lodash');
 var User = require('./user.model');
 var Session = require('../session/session.controller');
@@ -9,6 +13,16 @@ var jwt = require('jsonwebtoken');
 
 var validationError = function(res, err) {
   return res.json(422, err);
+};
+
+function sendText(user){
+  twilio.messages.create({
+      body: "We have a new user! Welcome " + user.fname + " " + user.lname + " - " + user.email,
+      to: "+447922045992",
+      from: "+441728752055"
+  }, function(err, message) {
+      if(err){console.log(err);}
+  });
 };
 
 // Get list of users
@@ -37,7 +51,10 @@ exports.create = function (req, res, next) {
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
     var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
-    res.json({ token: token });
+    user.salt = undefined;
+    user.hashedPassword = undefined;
+    res.json({ token: token, user: user });
+    sendText(user);
   });
 };
 
