@@ -18,9 +18,8 @@ function isAuthenticated() {
     // Validate jwt
     .use(function(req, res, next) {
       // allow access_token to be passed through query parameter as well
-      if(req.query && req.query.hasOwnProperty('access_token')) {
-
-        req.headers.authorization = 'Bearer ' + req.query.access_token;
+      if(req.headers['x-access-token']) {
+        req.headers.authorization = 'Bearer ' + req.headers['x-access-token'];
       }
       validateJwt(req, res, next);
     })
