@@ -17,7 +17,8 @@ module.exports = function (grunt) {
     cdnify: 'grunt-google-cdn',
     protractor: 'grunt-protractor-runner',
     injector: 'grunt-asset-injector',
-    buildcontrol: 'grunt-build-control'
+    buildcontrol: 'grunt-build-control',
+    aglio: 'grunt-aglio'
   });
 
   // Time how long tasks take. Can help when optimizing build times
@@ -493,6 +494,19 @@ module.exports = function (grunt) {
         }
       }
     },
+
+    // Api Documentation Creator
+    aglio: {
+      dev:{
+        files:{
+          "client/app/docs/docs.html": ["docs/api.md"]
+        },
+        options: {
+          theme: "flatly",
+          separator: "\n"
+        }
+      }
+    },
   });
 
   // Used for delaying livereload until after server has restarted
@@ -531,6 +545,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'env:all',
+      'aglio:dev',
       'concurrent:server',
       'injector',
       'wiredep',
@@ -589,6 +604,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'aglio:dev',
     'concurrent:dist',
     'injector',
     'wiredep',
