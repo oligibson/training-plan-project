@@ -1,68 +1,25 @@
 FORMAT: 1A
-HOST: https://api.mywebsite.com
+HOST: https://trainingplanserver.heroku.com/docs
 
 # Training Plan API's
-[Markdown](http://daringfireball.net/projects/markdown/syntax) **formatted** description.
 
-## Subtitle
-Also Markdown *formatted*. This also includes automatic "smartypants" formatting -- hooray!
-
-> "A quote from another time and place"
-
-Another paragraph. Code sample:
+Insert further description here...
 
 ```http
 Authorization: bearer 5262d64b892e8d4341000001
 ```
 
-And some code with no highlighting:
+## Subtitle
 
-```no-highlight
-Foo bar baz
-```
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse id lacus in mi pretium rutrum sit amet ac dui. Integer ac nulla quis lacus venenatis sollicitudin. In lectus ex, pretium sed arcu eu, mattis tristique mauris. Vestibulum tincidunt aliquam libero, nec lacinia ante volutpat a. Sed fringilla cursus aliquet. Praesent in lorem iaculis, condimentum ipsum sit amet, mollis quam. Aliquam congue ipsum nunc, a sodales arcu cursus eget.
 
-# Group Notes
+# Group Auth
 Group description (also with *Markdown*)
 
-## Note List [/notes]
-Note list description
+## Login [/auth/login]
 
-+ Even
-+ More
-+ Markdown
-
-+ Model
-
-    + Headers
-
-            Content-Type: application/json
-            X-Request-ID: f72fc914
-            X-Response-Time: 4ms
-
-    + Body
-
-            [
-                {
-                    "id": 1,
-                    "title": "Grocery list",
-                    "body": "Buy milk"
-                },
-                {
-                    "id": 2,
-                    "title": "TODO",
-                    "body": "Fix garage door"
-                }
-            ]
-
-### Get Notes [GET]
-Get a list of notes.
-
-+ Response 200
-
-    [Note List][]
-
-### Create New Note [POST]
-Create a new note
+### Login [POST]
+Login registered user
 
 + Request
 
@@ -73,11 +30,133 @@ Create a new note
     + Body
 
             {
-                "title": "My new note",
-                "body": "..."
+                "email": "john.doe@gmail.com",
+                "password": "password"
             }
 
-+ Response 201
++ Response 200
+
+    + Headers
+
+            Content-Type: application/json
+
+    + Body
+
+            {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NGM3OWQ2NmVjZDJkNzAzMDA5ZDg4NzEiLCJpYXQiOjE0MjI3Mjk3NDA4MjMsImV4cCI6MTQyMjc0Nzc0MDgyM30.3tAFGQywhUhANTxZ0Tyut20aPSL6IhxiVPRwHgokY-s",
+                "user": {
+                    "_id": "54c79d66ecd2d703009d8871",
+                    "email": "john.doe@gmail.com",
+                    "__v": 0,
+                    "role": "user",
+                    "sessionsThisWeek": 0,
+                    "sessionsTotal": 0,
+                    "emailUpdates": true,
+                    "lname": "Doe",
+                    "fname": "John"
+                }
+            }
+
++ Response 401
+
+    + Headers
+
+            Content-Type: application/json
+
+    + Body
+
+            {
+                "message": "This password is not correct."
+            }
+
+
+# Group Users
+Group description (also with *Markdown*)
+
+## User List [/api/users]
+
++ Model
+
+    + Headers
+
+            Content-Type: application/json,
+            X-Auth-Token: "xxxx"
+
+    + Body
+
+            [
+                {
+                    "_id":"54c79d66ecd2d703009d8871",
+                    "email":"john.doe1@gmail.com",
+                    "__v":0,
+                    "role":"user",
+                    "sessionsThisWeek":0,
+                    "sessionsTotal":0,
+                    "emailUpdates":false,
+                    "lname":"Doe",
+                    "fname":"John"
+                },
+                {
+                    "_id":"54c79d66ecd2d703009d8871",
+                    "email":"john.doe1@gmail.com",
+                    "__v":0,
+                    "role":"user",
+                    "sessionsThisWeek":0,
+                    "sessionsTotal":0,
+                    "emailUpdates":false,
+                    "lname":"Doe",
+                    "fname":"John"
+                }
+            ]
+
+### Get Users [GET]
+Get a list of all users.
+
++ Response 200
+
+    [User List][]
+
+### Create New User [POST]
+Create a new user
+
++ Request
+
+    + Headers
+
+            Content-Type: application/json
+
+    + Body
+
+            {
+                "fname": "John",
+                "lname": "Doe",
+                "email": "john.doe@gmail.com",
+                "password": "password",
+                "emailUpdates": "true"
+            }
+
++ Response 200
+
+    + Headers
+
+            Content-Type: application/json
+
+    + Body
+
+            {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NGM3OWQ2NmVjZDJkNzAzMDA5ZDg4NzEiLCJpYXQiOjE0MjI3Mjk3NDA4MjMsImV4cCI6MTQyMjc0Nzc0MDgyM30.3tAFGQywhUhANTxZ0Tyut20aPSL6IhxiVPRwHgokY-s",
+                "user": {
+                    "_id": "54c79d66ecd2d703009d8871",
+                    "email": "john.doe@gmail.com",
+                    "__v": 0,
+                    "role": "user",
+                    "sessionsThisWeek": 0,
+                    "sessionsTotal": 0,
+                    "emailUpdates": true,
+                    "lname": "Doe",
+                    "fname": "John"
+                }
+            }
 
 + Response 400
 
@@ -88,55 +167,45 @@ Create a new note
     + Body
 
             {
-                "error": "Invalid title"
+                "error": "Some required parameters were not found. See documentation."
             }
 
-## Note [/notes/{id}]
-Note description
+## User [/api/users/{id}]
 
 + Parameters
 
-    + id (required, string, `68a5sdf67`) ... The note ID
+    + id (required, string, `54c79d66ecd2d703009d8871`) ... The users ID
 
 + Model
 
     + Headers
 
-            Content-Type: application/json
-            X-Request-ID: f72fc914
-            X-Response-Time: 4ms
+            Content-Type: application/json,
+            X-Auth-Token: "xxxx"
 
     + Body
 
             {
-                "id": 1,
-                "title": "Grocery list",
-                "body": "Buy milk"
+                "_id":"54c79d66ecd2d703009d8871",
+                "email":"john.doe1@gmail.com",
+                "__v":0,
+                "role":"user",
+                "sessionsThisWeek":0,
+                "sessionsTotal":0,
+                "emailUpdates":false,
+                "lname":"Doe",
+                "fname":"John"
             }
 
-### Get Note [GET]
-Get a single note.
+### Get User [GET]
+Get a list of one user.
 
 + Response 200
 
-    [Note][]
+    [User][]
 
-+ Response 404
-
-    + Headers
-
-            Content-Type: application/json
-            X-Request-ID: f72fc914
-            X-Response-Time: 4ms
-
-    + Body
-
-            {
-                "error": "Note not found"
-            }
-
-### Update a Note [PUT]
-Update a single note
+### Update User [PUT]
+Update a single user
 
 + Request
 
@@ -152,24 +221,22 @@ Update a single note
 
 + Response 200
 
-    [Note][]
+    [User][]
 
 + Response 404
 
     + Headers
 
             Content-Type: application/json
-            X-Request-ID: f72fc914
-            X-Response-Time: 4ms
 
     + Body
 
             {
-                "error": "Note not found"
+                "error": "User not found"
             }
 
-### Delete a Note [DELETE]
-Delete a single note
+### Delete User [DELETE]
+Delete a single user
 
 + Response 204
 
@@ -178,8 +245,6 @@ Delete a single note
     + Headers
 
             Content-Type: application/json
-            X-Request-ID: f72fc914
-            X-Response-Time: 4ms
 
     + Body
 
@@ -187,31 +252,157 @@ Delete a single note
                 "error": "Note not found"
             }
 
-# Group Users
-Group description
+## Refresh User [/api/users/{id}/refresh]
 
-## User List [/users{?name,joinedBefore,joinedAfter,sort,limit}]
-A list of users
++ Model
+
+    + Headers
+
+            Content-Type: application/json,
+            X-Auth-Token: "xxxx"
+
+    + Body
+
+            {
+                token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NGM3OWQ2NmVjZDJkNzAzMDA5ZDg4NzEiLCJpYXQiOjE0MjI3Mjk3NDA4MjMsImV4cCI6MTQyMjc0Nzc0MDgyM30.3tAFGQywhUhANTxZ0Tyut20aPSL6IhxiVPRwHgokY-s",
+            }
+
+### Refresh User [GET]
+Generate a new authentication token for the user.
+
++ Response 200
+
+    [Refresh User][]
+
++ Response 404
+
+    + Headers
+
+            Content-Type: application/json
+
+    + Body
+
+            {
+                "error": "Note not found"
+            }
+
+## Change Password [/api/users/{id}/password]
+
++ Model
+
+    + Headers
+
+            Content-Type: application/json
+
+    + Body
+
+            {
+              "oldPassword": "password",
+              "newPassword": "pass"
+            }
+
+### Change Password [PUT]
+Change a users password.
+
++ Request
+
+    + Headers
+
+            Content-Type: application/json,
+            X-Auth-Token: "xxxx"
+
+    + Body
+
+            {
+              "oldPassword": "password",
+              "newPassword": "pass"
+            }
+
++ Response 200
+
++ Response 401
+
+    + Headers
+
+            Content-Type: application/json
+
+    + Body
+
+            {
+                "UnauthorizedError": "jwt expired"
+            }
+
+# Group Upload
+Group description (also with *Markdown*)
+
+## Photo Upload [/api/upload/profile/{id}]
 
 + Parameters
 
-    + name (optional, string, `alice`) ... Search for a user by name
-    + joinedBefore (optional, string, `2011-01-01`) ... Search by join date
-    + joinedAfter (optional, string, `2011-01-01`) ... Search by join date
-    + sort = `name` (optional, string, `joined`) ... Which field to sort by
+    + id (required, string, `54c79d66ecd2d703009d8871`) ... The users ID
 
-        + Values
-            + `name`
-            + `joined`
-            + `-joined`
-            + `age`
-            + `-age`
-            + `location`
-            + `-location`
-            + `plan`
-            + `-plan`
++ Model
 
-    + limit = `10` (optional, integer, `25`) ... The maximum number of users to return, up to `50`
+    + Headers
+
+            Content-Type: application/json
+
+    + Body
+
+            {
+                "_id":"54c79d66ecd2d703009d8871",
+                "email":"john.doe1@gmail.com",
+                "__v":0,
+                "role":"user",
+                "sessionsThisWeek":0,
+                "sessionsTotal":0,
+                "emailUpdates":false,
+                "lname":"Doe",
+                "fname":"John",
+                mobileProfileImage: "http://res.cloudinary.com/trainingplan/image/upload/c_fill,g_face,h_140,w_140/v1420897958/whfkbpgsmk2m3gfxp2sy.jpg",
+                profileImage: "http://res.cloudinary.com/trainingplan/image/upload/v1420897958/whfkbpgsmk2m3gfxp2sy.jpg",
+                profileImageId: "whfkbpgsmk2m3gfxp2sy"
+            }
+
+### Upload User Photo [POST]
+Add a user photo need to complete...
+
++ Request
+
+    + Headers
+
+            Content-Type: application/json
+
+    + Body
+
+            {
+                "fname": "John",
+                "lname": "Doe",
+                "email": "john.doe@gmail.com",
+                "password": "password",
+                "emailUpdates": "true"
+            }
+
++ Response 200
+
+    [Photo Upload][]
+
++ Response 400
+
+    + Headers
+
+            Content-Type: application/json
+
+    + Body
+
+            {
+                "error": ""
+            }
+
+# Group Sessions
+Group description (also with *Markdown*)
+
+## Session List [/api/sessions]
 
 + Model
 
@@ -223,42 +414,206 @@ A list of users
 
             [
                 {
-                    "name": "alice",
-                    "image": "http://foo.com/alice.jpg",
-                    "joined": "2013-11-01"
+                    "_id":"54c79d66ecd2d703009d8871",
+                    "email":"john.doe1@gmail.com",
+                    "__v":0,
+                    "role":"user",
+                    "sessionsThisWeek":0,
+                    "sessionsTotal":0,
+                    "emailUpdates":false,
+                    "lname":"Doe",
+                    "fname":"John"
                 },
                 {
-                    "name": "bob",
-                    "image": "http://foo.com/bob.jpg",
-                    "joined": "2013-11-02"
+                    "_id":"54c79d66ecd2d703009d8871",
+                    "email":"john.doe1@gmail.com",
+                    "__v":0,
+                    "role":"user",
+                    "sessionsThisWeek":0,
+                    "sessionsTotal":0,
+                    "emailUpdates":false,
+                    "lname":"Doe",
+                    "fname":"John"
                 }
             ]
 
-    + Schema
-
-
-### Get users [GET]
-Get a list of users. Example:
-
-```no-highlight
-https://api.mywebsite.com/users?sort=joined&limit=5
-```
+### Get Sessions [GET]
+Get a list of all sessions on service.
 
 + Response 200
 
-    [User List][]
+    [Session List][]
 
-# Group Tags and Tagging Long Title
-Get or set tags on notes
+### Create Session [POST]
+Create a new session
 
-## GET /tags
-Get a list of bars
++ Request
+
+    + Headers
+
+            Content-Type: application/json,
+            X-Auth-Token: "xxxx"
+
+    + Body
+
+            {
+                "fname": "John",
+                "lname": "Doe",
+                "email": "john.doe@gmail.com",
+                "password": "password",
+                "emailUpdates": "true"
+            }
 
 + Response 200
 
-## Get one tag [/tags/{id}]
-Get a single tag
+    + Headers
 
-### GET
+            Content-Type: application/json
+
+    + Body
+
+            {
+                "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NGM3OWQ2NmVjZDJkNzAzMDA5ZDg4NzEiLCJpYXQiOjE0MjI3Mjk3NDA4MjMsImV4cCI6MTQyMjc0Nzc0MDgyM30.3tAFGQywhUhANTxZ0Tyut20aPSL6IhxiVPRwHgokY-s",
+                "user": {
+                    "_id": "54c79d66ecd2d703009d8871",
+                    "email": "john.doe@gmail.com",
+                    "__v": 0,
+                    "role": "user",
+                    "sessionsThisWeek": 0,
+                    "sessionsTotal": 0,
+                    "emailUpdates": true,
+                    "lname": "Doe",
+                    "fname": "John"
+                }
+            }
+
++ Response 400
+
+    + Headers
+
+            Content-Type: application/json
+
+    + Body
+
+            {
+                "error": "Some required parameters were not found. See documentation."
+            }
+
+## Session [/api/sessions/{id}]
+
++ Parameters
+
+    + id (required, string, `54c79d66ecd2d703009d8871`) ... The session ID
+
++ Model
+
+    + Headers
+
+            Content-Type: application/json
+
+    + Body
+
+            {
+                "_id":"54c79d66ecd2d703009d8871",
+                "email":"john.doe1@gmail.com",
+                "__v":0,
+                "role":"user",
+                "sessionsThisWeek":0,
+                "sessionsTotal":0,
+                "emailUpdates":false,
+                "lname":"Doe",
+                "fname":"John"
+            }
+
+### Get Session [GET]
+Get a session.
 
 + Response 200
+
+    [Session][]
+
+### Update a Session [PUT]
+Update a single session
+
++ Request
+
+    + Headers
+
+            Content-Type: application/json
+
+    + Body
+
+            {
+                "title": "Grocery List (Safeway)"
+            }
+
++ Response 200
+
+    [Session][]
+
++ Response 404
+
+    + Headers
+
+            Content-Type: application/json
+
+    + Body
+
+            {
+                "error": "Session not found"
+            }
+
+### Delete Session [DELETE]
+Delete a single session
+
++ Response 201
+
++ Response 404
+
+    + Headers
+
+            Content-Type: application/json
+
+    + Body
+
+            {
+                "error": "Session not found"
+            }
+
+## User Sessions [/api/sessions/user/{id}]
+
++ Parameters
+
+    + id (required, string, `54c79d66ecd2d703009d8871`) ... The users ID
+
++ Model
+
+    + Headers
+
+            Content-Type: application/json,
+            X-Auth-Token: "xxxx"
+
+    + Body
+
+            {
+                token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NGM3OWQ2NmVjZDJkNzAzMDA5ZDg4NzEiLCJpYXQiOjE0MjI3Mjk3NDA4MjMsImV4cCI6MTQyMjc0Nzc0MDgyM30.3tAFGQywhUhANTxZ0Tyut20aPSL6IhxiVPRwHgokY-s",
+            }
+
+### Get All User Sessions [GET]
+Get a list of all sessions for a user.
+
++ Response 200
+
+    [User Sessions][]
+
++ Response 404
+
+    + Headers
+
+            Content-Type: application/json
+
+    + Body
+
+            {
+                "error": "User not found"
+            }

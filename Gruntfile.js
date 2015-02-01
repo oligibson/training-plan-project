@@ -84,6 +84,10 @@ module.exports = function (grunt) {
       gruntfile: {
         files: ['Gruntfile.js']
       },
+      avlio: {
+        files: ['docs/*.md'],
+        tasks: ['aglio:dev']
+      },
       livereload: {
         files: [
           '{.tmp,<%= yeoman.client %>}/{app,components}/**/*.css',
