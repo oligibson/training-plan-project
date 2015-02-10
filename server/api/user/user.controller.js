@@ -50,7 +50,7 @@ exports.create = function (req, res, next) {
   newUser.sessionsTotal = 0;
   newUser.save(function(err, user) {
     if (err) return validationError(res, err);
-    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
+    var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*24*7 });
     user.salt = undefined;
     user.hashedPassword = undefined;
     res.json({ token: token, user: user });
@@ -61,7 +61,7 @@ exports.create = function (req, res, next) {
 // Refreshes User Auth Token
 exports.refresh = function(req, res, next) {
   var userId = req.user._id;
-  var token = jwt.sign({_id: userId }, config.secrets.session, { expiresInMinutes: 60*5 });
+  var token = jwt.sign({_id: userId }, config.secrets.session, { expiresInMinutes: 60*24*7 });
   res.json({ token: token });
 };
 
