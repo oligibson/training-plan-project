@@ -70,6 +70,8 @@ exports.getUser = function(req, res) {
   User.findById(req.params.id, function (err, user) {
     if(err) { return handleError(res, err); }
     if(!user) { return res.send(404); }
+    user.salt = undefined;
+    user.hashedPassword = undefined;
     return res.json(user);
   });
 };
@@ -102,6 +104,8 @@ exports.update = function(req, res) {
     
     user.save(function (err) {
       if (err) { return handleError(res, err); }
+      user.salt = undefined;
+      user.hashedPassword = undefined;
       return res.json(200, user);
     });
   });
