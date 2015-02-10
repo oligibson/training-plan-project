@@ -85,10 +85,6 @@ exports.getUserSessions = function (req, res) {
       res.json({error: err});
       return;
     }
-    if (sessions.length < 1){
-      res.send(404);
-      return;
-    }
     res.json(200, sessions);
   });
 };
