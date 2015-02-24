@@ -10,6 +10,7 @@ var Session = require('../session/session.controller');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var email = require('../../components/emails/email.service');
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -54,6 +55,7 @@ exports.create = function (req, res, next) {
     user.salt = undefined;
     user.hashedPassword = undefined;
     res.json({ token: token, user: user });
+    email.sendEmail('notification', 'Welcome to Training App', user, null);
     sendText(user);
   });
 };

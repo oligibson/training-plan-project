@@ -6,16 +6,16 @@ var mandrill_client = new mandrill.Mandrill('L6ejXRbcxPz57P8Qq3boAw');
 /**
 * Sends an email to the user
 */
-function sendEmail() {
-	var template_name = "notification";
-	var template_content = [];
+function sendEmail(template, subject, user, content) {
+	var template_name = template;
+	var template_content = content || [];
 	var message = {
-	    "subject": "Welcome to Training App",
+	    "subject": subject,
 	    "from_email": "oli@oligibson.com",
 	    "from_name": "Oli Gibson",
 	    "to": [{
-	            "email": "oligibson1@gmail.com",
-	            "name": "Oli Gibson",
+	            "email": user.email,
+	            "name": user.fname + " " + user.lname,
 	            "type": "to"
 	        }],
 	    "headers": {

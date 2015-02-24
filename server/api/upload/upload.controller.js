@@ -3,7 +3,6 @@
 var _ = require('lodash');
 var cloudinary = require('cloudinary');
 var User = require('../user/user.model');
-var email = require('../../components/emails/email.service');
 
 cloudinary.config({ 
   cloud_name: 'trainingplan', 
@@ -42,10 +41,6 @@ exports.profileUpload = function(req, res) {
       }
     });
   });
-};
-
-exports.email = function(req, res) {
-  email.sendEmail();
 };
 
 function handleError(res, err) {
