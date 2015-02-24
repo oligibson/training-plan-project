@@ -1,30 +1,116 @@
-.thing-form {
-    margin: 20px 0;
+/* FONT FACE LOADER */
+@font-face {
+    font-family: 'Lane';
+    src: url('../../components/fonts/lanenar_Lane.eot');
+    src: url('../../components/fonts/lanenar_Lane.eot?#iefix') format('embedded-opentype'), url('../../components/fonts/lanenar_Lane.woff') format('woff'), url('../../components/fonts/lanenar_Lane.ttf') format('truetype'), url('../../components/fonts/lanenar_Lane.svg#Lane') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
-#banner {
-    border-bottom: none;
-    margin-top: -20px;
+html {
+    font-size: 100%;
 }
 
-#banner h1 {
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -1px;
+header .solid-color {
+    min-height: 100vh;
 }
 
-.hero-unit {
-    position: relative;
-    padding: 30px 15px;
-    color: #F5F5F5;
+.solid-color {
+    background: rgba(0, 142, 214, 1);
+}
+
+body {
+    background: #232323;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: #c8c8c8;
+    line-height: 28px;
     text-align: center;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    background: #4393B9;
+    overflow-x: hidden !important;
+    margin: auto !important;
 }
 
-.footer {
-    text-align: center;
-    padding: 30px 0;
-    margin-top: 70px;
-    border-top: 1px solid #E5E5E5;
+h1 {
+font-size: 3.75rem;
+line-height: 4.688rem;
+}
+
+h1, h2 {
+font-family: 'Lane', sans-serif;
+font-weight: normal;
+}
+
+h5 {
+font-size: 18px;
+font-weight: 300;
+}
+
+header .only-logo .navbar {
+    background: none;
+    padding: 60px;
+}
+
+header .home-contents {
+    margin-top: 5%;
+}
+
+header .intro-section {
+    text-align: left;
+}
+
+header .intro-section .intro {
+    color: #ffffff;
+    margin-bottom: 36px;
+}
+
+header .intro-section h5 {
+    color: #ffffff;
+}
+
+header .only-logo .navbar .navbar-header {
+float: none;
+}
+
+header .intro-section .buttons {
+margin-top: 35px;
+}
+
+header .intro-section .standard-button {
+margin: 0;
+}
+
+.standard-button {
+background: #005885;
+}
+
+.standard-button, .standard-button2 {
+font-size: 18px;
+font-weight: 400 !important;
+border-radius: 4px !important;
+text-shadow: 0 !important;
+color: #ffffff;
+min-width: 150px;
+border: none;
+padding: 16px 25px 16px 25px;
+margin: 5px;
+-webkit-transition: all ease 0.25s;
+transition: all ease 0.25s;
+}
+
+.standard-button i, .standard-button2 i {
+vertical-align: inherit;
+margin-right: 8px;
+font-size: 20px;
+margin-top: -3px;
+}
+
+header .phone-image {
+max-width: 350px;
+margin: auto;
+margin-bottom: 50px;
+}
+
+header .phone-image img {
+width: 100%;
 }
