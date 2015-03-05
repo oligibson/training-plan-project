@@ -1,8 +1,8 @@
 /* FONT FACE LOADER */
 @font-face {
     font-family: 'Lane';
-    src: url('../../components/fonts/lanenar_Lane.eot');
-    src: url('../../components/fonts/lanenar_Lane.eot?#iefix') format('embedded-opentype'), url('../../components/fonts/lanenar_Lane.woff') format('woff'), url('../../components/fonts/lanenar_Lane.ttf') format('truetype'), url('../../components/fonts/lanenar_Lane.svg#Lane') format('svg');
+    src: url('../../assets/fonts/lanenar_Lane.eot');
+    src: url('../../assets/fonts/lanenar_Lane.eot?#iefix') format('embedded-opentype'), url('../../assets/fonts/lanenar_Lane.woff') format('woff'), url('../../assets/fonts/lanenar_Lane.ttf') format('truetype'), url('../../assets/fonts/lanenar_Lane.svg#Lane') format('svg');
     font-weight: normal;
     font-style: normal;
 }

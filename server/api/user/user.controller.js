@@ -11,6 +11,7 @@ var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 var email = require('../../components/emails/email.service');
+var Statistics = require('../../components/statistics/statistics.service');
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -72,9 +73,11 @@ exports.getUser = function(req, res) {
   User.findById(req.params.id, function (err, user) {
     if(err) { return handleError(res, err); }
     if(!user) { return res.send(404); }
-    user.salt = undefined;
-    user.hashedPassword = undefined;
-    return res.json(user);
+    Statistics.getTotalSessionsThisWeek(user._id, function(newUser){
+      newUser.salt = undefined;
+      newUser.hashedPassword = undefined;
+      return res.json(newUser);
+    });
   });
 };
 

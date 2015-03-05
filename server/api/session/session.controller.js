@@ -6,59 +6,7 @@ var Session = Model.Session;
 var Exercise = Model.Exercise;
 var Set = Model.Set;
 var User = require('../user/user.model');
-
-function getMonday(d) {
-  d = new Date(d);
-  var day = d.getDay(),
-      diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
-  return new Date(d.setDate(diff));
-}
-
-function getSessionNumber(userId, callback){
-  // Count the number of sessions a user has
-  Session.find({'userId' : userId}).count(function(err, count){
-    if (err) { return handleError(res, err); }
-    User.findById(userId, function (err, user) {
-      if (err) { return handleError(res, err); }
-      if(!user) { return res.send(404); }
-      user.sessionsTotal = count;
-      user.save(function (err) {
-        if (err) { return handleError(res, err); }
-        callback(user);
-      });
-    });
-  });
-}
-
-function getLatestSession(userId, callback){
-  Session.find({'userId' : userId}).sort({date: -1}).limit(1).exec(function (err, session){
-    if (err) { return handleError(res, err); }
-    User.findById(userId, function (err, user) {
-      if (err) { return handleError(res, err); }
-      if(!user) { return res.send(404); }
-      user.lastSession = session[0].date;
-      user.save(function (err, user) {
-        if (err) { return handleError(res, err); }
-        callback(user);
-      });
-    });
-  });
-};
-
-function getTotalSessionsThisWeek(userId, callback){
-  Session.find({'userId' : userId}).where('date').gt(getMonday(new Date())).count(function (err, count){
-    if (err) { return handleError(res, err); }
-    User.findById(userId, function (err, user) {
-      if (err) { return handleError(res, err); }
-      if(!user) { return res.send(404); }
-      user.sessionsThisWeek = count;
-      user.save(function (err, user) {
-        if (err) { return handleError(res, err); }
-        callback(user);
-      });
-    });
-  });
-}
+var Statistics = require('../../components/statistics/statistics.service');
 
 // Get list of sessions
 exports.index = function(req, res) {
@@ -125,9 +73,9 @@ exports.create = function(req, res) {
 
         user.save(function (err, user) {
           if (err) { return handleError(res, err); }
-          getSessionNumber(session.userId, function(){
-            getLatestSession(session.userId, function(){
-              getTotalSessionsThisWeek(session.userId, function(){
+          Statistics.getSessionNumber(session.userId, function(){
+            Statistics.getLatestSession(session.userId, function(){
+              Statistics.getTotalSessionsThisWeek(session.userId, function(){
                 return res.json(200, session);
               });
             });
@@ -178,9 +126,9 @@ exports.destroy = function(req, res) {
     if(!session) { return res.send(404); }
     session.remove(function(err) {
       if(err) { return handleError(res, err); }
-      getSessionNumber(session.userId, function(){
-        getLatestSession(session.userId, function(){
-          getTotalSessionsThisWeek(session.userId, function(){
+      Statistics.getSessionNumber(session.userId, function(){
+        Statistics.getLatestSession(session.userId, function(){
+          Statistics.getTotalSessionsThisWeek(session.userId, function(){
             return res.send(204);
           });
         });
