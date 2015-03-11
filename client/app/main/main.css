@@ -16,7 +16,11 @@ header .solid-color {
 }
 
 .solid-color {
-    background: rgba(0, 142, 214, 1);
+    background: rgba(56, 126, 245, 1);
+}
+
+.nav-logo{
+    width: 118px;
 }
 
 body {
