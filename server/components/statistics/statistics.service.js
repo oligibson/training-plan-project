@@ -36,7 +36,7 @@ function getLatestSession(userId, callback){
     User.findById(userId, function (err, user) {
       if (err) { return handleError(res, err); }
       if(!user) { return res.send(404); }
-      user.lastSession = session[0].date;
+      (session.length === 0) ? user.lastSession = undefined : user.lastSession = session[0].date;
       user.save(function (err, user) {
         if (err) { return handleError(res, err); }
         callback(user);
