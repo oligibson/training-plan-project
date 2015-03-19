@@ -25,6 +25,13 @@ var set = new Schema({
   weight      : {type : Number, default: 0}
 });
 
+SessionSchema.options.toJSON = {
+    transform: function(doc, ret, options) {
+        delete ret.__v;
+        return ret;
+    }
+};
+
 exports.Session  = mongoose.model('Session', SessionSchema);
 exports.Exercise = mongoose.model('Exercise', exercise);
 exports.Set      = mongoose.model('Set',      set);

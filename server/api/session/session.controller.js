@@ -33,7 +33,10 @@ exports.getUserSessions = function (req, res) {
       res.json({error: err});
       return;
     }
-    res.json(200, sessions);
+    var transformedSessions = sessions.map(function(session) {
+        return session.toJSON();
+    });
+    res.send(transformedSessions, 200);
   });
 };
 
